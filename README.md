@@ -24,4 +24,4 @@ npm run android
 
 #### 更新日志
 
-2017.10.16  Project Init
+2018.04.13  Project Init

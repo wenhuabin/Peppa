@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, AppRegistry, Button, StyleSheet, ScrollView, Image, View , Text} from 'react-native';
+import { Alert, AppRegistry, Button, StyleSheet, ScrollView, Image, View , Text, FlatList} from 'react-native';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -13,28 +13,33 @@ export default class App extends React.Component {
 
     render() {
       return (
-          <ScrollView>
-            <Text style={{fontSize:96}}>Scroll me plz</Text>
-            <Text style={{fontSize:96}}>If you like</Text>
-            <Text style={{fontSize:96}}>Scrolling down</Text>
-            <Text style={{fontSize:96}}>What's the best</Text>
-            <Text style={{fontSize:80}}>React Native</Text>
-          </ScrollView>
+          <View style={styles.container}>
+            <FlatList
+              data={[
+                {key: 'Devin'},
+                {key: 'Jackson'},
+                {key: 'James'},
+                {key: 'Joel'},
+                {key: 'John'},
+                {key: 'Jillian'},
+                {key: 'Jimmy'},
+                {key: 'Julie'},
+              ]}
+              renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+            />
+          </View>
       );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-     flex: 1,
-     justifyContent: 'center',
-    },
-    buttonContainer: {
-      margin: 20
-    },
-    alternativeLayoutButtonContainer: {
-      margin: 20,
-      flexDirection: 'row',
-      justifyContent: 'space-between'
-    }
+  container: {
+   flex: 1,
+   paddingTop: 22
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
 })

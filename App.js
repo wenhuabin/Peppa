@@ -1,5 +1,15 @@
 import React from 'react';
-import { Alert, AppRegistry, Button, StyleSheet, ScrollView, Image, View , Text, FlatList} from 'react-native';
+import {
+    Alert,
+    Button,
+    StyleSheet,
+    ScrollView,
+    Image,
+    View,
+    Text,
+    FlatList,
+    SectionList
+} from 'react-native';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -26,6 +36,15 @@ export default class App extends React.Component {
                 {key: 'Julie'},
               ]}
               renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+            />
+            <SectionList
+              sections={[
+                {title: 'D', data: ['Devin']},
+                {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+              ]}
+              renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+              renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+              keyExtractor={(item, index) => index}
             />
           </View>
       );

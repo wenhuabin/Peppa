@@ -22,6 +22,10 @@ export default class App extends React.Component {
         this.state = {text: ''};
     }
 
+    componentDidMount(){
+        console.log(Platform);
+    }
+
     _onPressButton() {
       Alert.alert('You tapped the button!')
     }

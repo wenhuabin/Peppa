@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Platform,
     Alert,
     Button,
     StyleSheet,
@@ -8,7 +9,11 @@ import {
     View,
     Text,
     FlatList,
-    SectionList
+    SectionList,
+    TouchableHighlight,
+    TouchableOpacity,
+    TouchableNativeFeedback,
+    TouchableWithoutFeedback
 } from 'react-native';
 
 export default class App extends React.Component {
@@ -18,34 +23,45 @@ export default class App extends React.Component {
     }
 
     _onPressButton() {
-        Alert.alert('You tapped the button!')
+      Alert.alert('You tapped the button!')
+    }
+
+    _onLongPressButton() {
+      Alert.alert('You long-pressed the button!')
     }
 
     render() {
       return (
           <View style={styles.container}>
-            <FlatList
-              data={[
-                {key: 'Devin'},
-                {key: 'Jackson'},
-                {key: 'James'},
-                {key: 'Joel'},
-                {key: 'John'},
-                {key: 'Jillian'},
-                {key: 'Jimmy'},
-                {key: 'Julie'},
-              ]}
-              renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-            />
-            <SectionList
-              sections={[
-                {title: 'D', data: ['Devin']},
-                {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-              ]}
-              renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-              renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-              keyExtractor={(item, index) => index}
-            />
+            <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>TouchableHighlight</Text>
+              </View>
+            </TouchableHighlight>
+            <TouchableOpacity onPress={this._onPressButton}>
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>TouchableOpacity</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableNativeFeedback
+                onPress={this._onPressButton}
+                background={Platform.OS === 'android' ? TouchableNativeFeedback.SelectableBackground() : ''}>
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>TouchableNativeFeedback</Text>
+              </View>
+            </TouchableNativeFeedback>
+            <TouchableWithoutFeedback
+                onPress={this._onPressButton}
+                >
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>TouchableWithoutFeedback</Text>
+              </View>
+            </TouchableWithoutFeedback>
+            <TouchableHighlight onPress={this._onPressButton} onLongPress={this._onLongPressButton} underlayColor="white">
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>Touchable with Long Press</Text>
+              </View>
+            </TouchableHighlight>
           </View>
       );
     }
@@ -53,12 +69,17 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-   flex: 1,
-   paddingTop: 22
+    paddingTop: 60,
+    alignItems: 'center'
   },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+  button: {
+    marginBottom: 30,
+    width: 260,
+    alignItems: 'center',
+    backgroundColor: '#2196F3'
   },
+  buttonText: {
+    padding: 20,
+    color: 'white'
+  }
 })
